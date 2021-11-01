@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <!--是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。-->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+    </settings>
+
+<!--    MyBatis 在设置预处理语句（PreparedStatement）中的参数或从结果集中取出一个值时， 都会用类型处理器将获取到的值以合适的方式转换成 Java 类型-->
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="java.math.RoundingMode"/>
+        <typeHandler handler="org.apache.ibatis.type.ZonedDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.OffsetDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.OffsetTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />
+    </typeHandlers>
+</configuration>

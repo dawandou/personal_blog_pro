@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <!--        log文件前缀-->
+        <Property name="filename">blog</Property>
+        <!--        日志存放路径-->
+        <Property name="log_path">/blogLog/logs</Property>
+        <!--        log文件编码-->
+        <Property name="blogLog_encoding">UTF-8</Property>
+        <!--        log文件大小-->
+        <Property name="blogLog_size">300MB</Property>
+        <!--        log文件自动删除时间-->
+        <Property name="blogLog_time">5d</Property>
+    </Properties>
+
+    <Appenders>
+        <!--    系统相关日志          -->
+        <RollingRandomAccessFile name="BLOG_FILE"
+                                 fileName="${log_path}/${filename}.log"
+                                 filePattern="${log_path}/${filename}_%d{yyyy-MM-dd}_%i.log.gz">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5p][%t][%c{1}] %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${blogLog_size}"/>
+            </Policies>
+
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+
+        <!--    系统相关日志            -->
+        <AsyncRoot level="info" includeLocation="true">
+            <AppenderRef ref="BLOG_FILE" level="info"/>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>

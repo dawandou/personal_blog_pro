@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="passWord"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from person_user;
+    </select>
+
+    <insert id="insert" parameterType="com.blog.personalblog.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO person_user (username, password, email, last_login_time, phone, nickname, create_time, update_time)
+        VALUES(#{userName}, #{passWord}, #{email}, #{lastLoginTime}, #{phone}, #{nickname}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="com.blog.personalblog.entity.User">
+        update person_user
+        <set>
+            username = #{userName},
+            password = #{passWord},
+            email = #{email},
+            last_login_time = #{lastLoginTime},
+            phone = #{phone},
+            nickname = #{nickname}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from person_user where id = #{id, jdbcType=INTEGER}
+    </delete>
+
+</mapper>

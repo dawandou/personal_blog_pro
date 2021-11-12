@@ -41,7 +41,7 @@ public class User {
     /**
      * 手机号
      */
-    private Integer phone;
+    private Long phone;
 
     /**
      * 昵称

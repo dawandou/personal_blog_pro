@@ -32,12 +32,12 @@ public interface UserMapper {
      * 更新用户
      * @param user
      */
-    void update(@Param("user")User user);
+    void update(User user);
 
     /**
      * 删除用户
      * @param id
      * @return
      */
-    int delete(@Param("id")int id);
+    int delete(int id);
 }

@@ -20,8 +20,8 @@
     </select>
 
     <insert id="insert" parameterType="com.blog.personalblog.entity.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO person_user (username, password, email, last_login_time, phone, nickname, create_time, update_time)
-        VALUES(#{userName}, #{passWord}, #{email}, #{lastLoginTime}, #{phone}, #{nickname}, #{createTime}, #{updateTime})
+        INSERT INTO person_user (username, password, email, last_login_time, phone, nickname)
+        VALUES(#{userName}, #{passWord}, #{email}, #{lastLoginTime}, #{phone}, #{nickname})
     </insert>
 
     <update id="update" parameterType="com.blog.personalblog.entity.User">

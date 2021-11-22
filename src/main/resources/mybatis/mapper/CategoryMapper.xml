@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.Category">
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="getCategoryPage" resultMap="BaseResultMap">
+        select * from person_category
+    </select>
+
+    <insert id="create" parameterType="com.blog.personalblog.entity.Category" useGeneratedKeys="true" keyProperty="categoryId">
+        INSERT INTO person_category (category_name)
+        VALUES(#{categoryName})
+    </insert>
+
+    <update id="update" parameterType="com.blog.personalblog.entity.Category">
+        update person_category
+        <set>
+            category_name = #{categoryName}
+        </set>
+        WHERE category_id = #{categoryId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from person_category where category_id = #{categoryId, jdbcType=INTEGER}
+    </delete>
+
+    <select id="getById" resultType="com.blog.personalblog.entity.Category">
+        select category_id from person_category where category_id = #{categoryId}
+    </select>
+
+</mapper>

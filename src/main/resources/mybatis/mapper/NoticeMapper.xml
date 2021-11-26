@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.NoticeMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.Notice">
+        <result column="notice_id" jdbcType="INTEGER" property="noticeId"/>
+        <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle"/>
+        <result column="notice_type" jdbcType="INTEGER" property="noticeType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="notice_content" jdbcType="VARCHAR" property="noticeContent"/>
+        <result column="create_by" jdbcType="VARCHAR" property="create_by"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="getNoticePage" resultMap="BaseResultMap">
+        select * from person_notice
+    </select>
+
+    <insert id="createNotice" parameterType="com.blog.personalblog.entity.Notice" useGeneratedKeys="true" keyProperty="categoryId">
+        INSERT INTO person_notice (notice_title, notice_type, status, notice_content, create_by)
+        VALUES(#{noticeTitle}, #{noticeType}, #{status}, #{noticeContent}, #{create_by})
+    </insert>
+
+    <update id="updateNotice" parameterType="com.blog.personalblog.entity.Notice">
+        update person_notice
+        <set>
+            notice_title = #{noticeTitle},
+            notice_type = #{noticeType},
+            status = #{status},
+            notice_content = #{noticeContent},
+            create_by = #{create_by}
+        </set>
+        WHERE notice_id = #{notice_id}
+    </update>
+
+    <delete id="deleteNotice" parameterType="java.lang.Integer">
+        delete from person_notice where notice_id = #{noticeId, jdbcType=INTEGER}
+    </delete>
+
+
+</mapper>

@@ -36,7 +36,7 @@ public class NoticeController {
      * @return
      */
     @ApiOperation(value = "公告列表")
-    @PostMapping("list")
+    @PostMapping("/list")
     public JsonResult<Object> listPage(@RequestBody @Valid PageRequest pageRequest) {
         List<Notice> noticeList = noticeService.getNoticePage(pageRequest);
         PageInfo pageInfo = new PageInfo(noticeList);
@@ -50,7 +50,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "添加公告")
     @PostMapping("/create")
-    public JsonResult<Object> categoryCreate(@RequestBody @Valid Notice notice) {
+    public JsonResult<Object> noticeCreate(@RequestBody @Valid Notice notice) {
         int isStatus = noticeService.saveNotice(notice);
         if (isStatus == 0) {
             return JsonResult.error("添加公告失败");
@@ -64,7 +64,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "修改公告")
     @PostMapping("/update")
-    public JsonResult<Object> categoryUpdate(@RequestBody @Valid Notice notice) {
+    public JsonResult<Object> noticeUpdate(@RequestBody @Valid Notice notice) {
         int isStatus = noticeService.updateNotice(notice);
         if (isStatus == 0) {
             return JsonResult.error("修改公告失败");
@@ -78,7 +78,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "删除公告")
     @PostMapping("/delete/{id}")
-    public JsonResult<Object> categoryDelete(@PathVariable(value = "id") int id) {
+    public JsonResult<Object> noticeDelete(@PathVariable(value = "id") int id) {
         noticeService.deleteNotice(id);
         return JsonResult.success();
     }

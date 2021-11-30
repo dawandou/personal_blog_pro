@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.TagMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.Tag">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="tag_name" jdbcType="VARCHAR" property="tagName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="getTagPage" resultMap="BaseResultMap">
+        select * from person_tag
+    </select>
+
+    <insert id="createTag" parameterType="com.blog.personalblog.entity.Tag" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO person_tag (tag_name)
+        VALUES(#{tagName})
+    </insert>
+
+    <update id="updateTag" parameterType="com.blog.personalblog.entity.Tag">
+        update person_tag
+        <set>
+            tag_name = #{tagName}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTag" parameterType="java.lang.Integer">
+        delete from person_tag where id = #{id, jdbcType=INTEGER}
+    </delete>
+
+    <insert id="batchAddTag" parameterType="java.util.List">
+        INSERT INTO person_tag (tag_name)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.tagName})
+        </foreach>
+    </insert>
+
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from person_tag where id in
+        <foreach collection="list" item="item" open="(" close=")" separator="," >
+            (#{item.id})
+        </foreach>
+    </delete>
+
+    <select id="getByTagName" resultType="com.blog.personalblog.entity.Tag">
+        SELECT * FROM person_tag WHERE tag_name = #{tagName}
+    </select>
+
+</mapper>

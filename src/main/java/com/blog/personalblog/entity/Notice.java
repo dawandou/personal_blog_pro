@@ -39,7 +39,7 @@ public class Notice {
     /**
      * 创建者
      */
-    private String create_by;
+    private String createBy;
 
     /**
      * 创建时间

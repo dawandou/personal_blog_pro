@@ -2,6 +2,7 @@ package com.blog.personalblog.service.Impl;
 
 import com.blog.personalblog.bo.ArticleBO;
 import com.blog.personalblog.entity.Article;
+import com.blog.personalblog.entity.ArticleTag;
 import com.blog.personalblog.mapper.ArticleMapper;
 import com.blog.personalblog.service.ArticleService;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author: SuperMan
@@ -59,6 +61,14 @@ public class ArticleServiceImpl implements ArticleService {
     public void saveArticle(Article article) {
         articleMapper.createArticle(article);
         articleMap.put(article.getId(), article);
+        //添加文章标签
+        if(article.getTagIdList() != null) {
+            List<ArticleTag> articleTagList = article.getTagIdList().stream().map(tagId -> ArticleTag.builder()
+            .tagId(tagId)
+            .articleId(article.getId())
+            .build()).collect(Collectors.toList());
+        }
+
     }
 
     @Override

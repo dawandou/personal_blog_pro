@@ -1,5 +1,7 @@
 package com.blog.personalblog.controller;
 
+import com.blog.personalblog.annotation.OperationLogSys;
+import com.blog.personalblog.annotation.OperationType;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
 import com.blog.personalblog.entity.Tag;
@@ -47,6 +49,7 @@ public class TagController {
      */
     @ApiOperation(value = "添加标签")
     @PostMapping("/create")
+    @OperationLogSys(desc = "添加标签", operationType = OperationType.INSERT)
     public JsonResult<Object> tagCreate(@RequestBody @Valid Tag tag) {
         int isStatus = tagService.saveTag(tag);
         if (isStatus == 0) {
@@ -63,6 +66,7 @@ public class TagController {
      */
     @ApiOperation(value = "批量添加标签")
     @PostMapping("/batchCreate")
+    @OperationLogSys(desc = "批量添加标签", operationType = OperationType.INSERT)
     public JsonResult<Object> batchCreate(@RequestBody @Valid Tag tags) {
         try {
             boolean isStatus = tagService.batchAddTag(tags.getTagName());
@@ -80,8 +84,9 @@ public class TagController {
      * @param ids
      * @return
      */
-    @ApiOperation(value = "批量添加标签")
+    @ApiOperation(value = "批量删除标签")
     @DeleteMapping("/batchDelete")
+    @OperationLogSys(desc = "批量删除标签", operationType = OperationType.DELETE)
     public JsonResult<Object> batchDelete(@RequestBody @Valid String ids) {
         boolean isDelTag = tagService.batchDelTag(ids);
         if (!isDelTag) {
@@ -96,6 +101,7 @@ public class TagController {
      */
     @ApiOperation(value = "修改标签")
     @PutMapping("/update")
+    @OperationLogSys(desc = "修改标签", operationType = OperationType.UPDATE)
     public JsonResult<Object> tagUpdate(@RequestBody @Valid Tag tag) {
         int isStatus = tagService.updateTag(tag);
         if (isStatus == 0) {
@@ -110,6 +116,7 @@ public class TagController {
      */
     @ApiOperation(value = "删除标签")
     @DeleteMapping("/delete/{id}")
+    @OperationLogSys(desc = "删除标签", operationType = OperationType.DELETE)
     public JsonResult<Object> tagDelete(@PathVariable(value = "id") int id) {
         tagService.deleteTag(id);
         return JsonResult.success();

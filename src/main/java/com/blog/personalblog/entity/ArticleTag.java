@@ -5,14 +5,14 @@ import lombok.Data;
 
 /**
  * @author: SuperMan
- * @create: 2022-01-14
- */
-@Data
+ * @create: 2022-01-24
+ **/
 @Builder
+@Data
 public class ArticleTag {
 
     /**
-     * id主键
+     * id
      */
     private Integer id;
 

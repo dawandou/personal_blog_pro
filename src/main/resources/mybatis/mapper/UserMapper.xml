@@ -41,4 +41,12 @@
         delete from person_user where id = #{id, jdbcType=INTEGER}
     </delete>
 
+    <select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from person_user where id = #{userId, jdbcType=INTEGER}
+    </select>
+
+    <select id="findByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from person_user where username = #{userName, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

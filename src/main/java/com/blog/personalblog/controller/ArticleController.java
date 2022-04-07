@@ -1,5 +1,7 @@
 package com.blog.personalblog.controller;
 
+import com.blog.personalblog.annotation.OperationLogSys;
+import com.blog.personalblog.annotation.OperationType;
 import com.blog.personalblog.bo.ArticleBO;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
@@ -51,6 +53,7 @@ public class ArticleController {
      */
     @ApiOperation(value = "添加文章")
     @PostMapping("/create")
+    @OperationLogSys(desc = "添加文章", operationType = OperationType.INSERT)
     public JsonResult<Object> articleCreate(@RequestBody @Valid Article article) {
         articleService.saveArticle(article);
         return JsonResult.success();
@@ -62,6 +65,7 @@ public class ArticleController {
      */
     @ApiOperation(value = "修改文章")
     @PostMapping("/update")
+    @OperationLogSys(desc = "修改文章", operationType = OperationType.UPDATE)
     public JsonResult<Object> articleUpdate(@RequestBody @Valid Article article) {
         articleService.updateArticle(article);
         return JsonResult.success();
@@ -73,6 +77,7 @@ public class ArticleController {
      */
     @ApiOperation(value = "删除文章")
     @DeleteMapping("/delete/{id}")
+    @OperationLogSys(desc = "删除文章", operationType = OperationType.DELETE)
     public JsonResult<Object> articleDelete(@PathVariable(value = "id") int id) {
         articleService.deleteArticle(id);
         return JsonResult.success();
@@ -85,6 +90,7 @@ public class ArticleController {
      */
     @ApiOperation(value = "根据文章id查找")
     @PostMapping("/getArticle/{id}")
+    @OperationLogSys(desc = "根据文章id查找", operationType = OperationType.SELECT)
     public JsonResult<Object> getArticleById(@PathVariable(value = "id") int id) {
         Article article = articleService.findById(id);
         return JsonResult.success(article);

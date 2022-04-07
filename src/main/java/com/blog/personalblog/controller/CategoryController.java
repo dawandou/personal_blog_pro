@@ -1,5 +1,7 @@
 package com.blog.personalblog.controller;
 
+import com.blog.personalblog.annotation.OperationLogSys;
+import com.blog.personalblog.annotation.OperationType;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.service.CategoryService;
 import com.blog.personalblog.util.JsonResult;
@@ -49,6 +51,7 @@ public class CategoryController {
      */
     @ApiOperation(value = "添加分类")
     @PostMapping("/create")
+    @OperationLogSys(desc = "添加分类", operationType = OperationType.INSERT)
     public JsonResult<Object> categoryCreate(@RequestBody @Valid Category category) {
         int isStatus = categoryService.saveCategory(category);
         if (isStatus == 0) {
@@ -63,6 +66,7 @@ public class CategoryController {
      */
     @ApiOperation(value = "修改分类")
     @PostMapping("/update")
+    @OperationLogSys(desc = "修改分类", operationType = OperationType.UPDATE)
     public JsonResult<Object> categoryUpdate(@RequestBody @Valid Category category) {
         int isStatus = categoryService.updateCategory(category);
         if (isStatus == 0) {
@@ -77,6 +81,7 @@ public class CategoryController {
      */
     @ApiOperation(value = "删除分类")
     @PostMapping("/delete/{id}")
+    @OperationLogSys(desc = "删除分类", operationType = OperationType.DELETE)
     public JsonResult<Object> categoryDelete(@PathVariable(value = "id") int id) {
         categoryService.deleteCategory(id);
         return JsonResult.success();

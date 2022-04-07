@@ -2,6 +2,7 @@ package com.blog.personalblog.service;
 
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.entity.Tag;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -57,5 +58,12 @@ public interface TagService {
      * @return
      */
     Tag findByTagName(String tagName);
+
+    /**
+     * 根据id查找标签
+     * @param tagId
+     * @return
+     */
+    Tag findTagById(Integer tagId);
 
 }

@@ -50,4 +50,8 @@
         SELECT * FROM person_tag WHERE tag_name = #{tagName}
     </select>
 
+    <select id="getTagById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT id, tag_name FROM person_tag WHERE id = #{tagId}
+    </select>
+
 </mapper>

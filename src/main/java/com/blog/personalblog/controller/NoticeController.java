@@ -1,5 +1,7 @@
 package com.blog.personalblog.controller;
 
+import com.blog.personalblog.annotation.OperationLogSys;
+import com.blog.personalblog.annotation.OperationType;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
 import com.blog.personalblog.entity.Category;
@@ -50,6 +52,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "添加公告")
     @PostMapping("/create")
+    @OperationLogSys(desc = "添加公告", operationType = OperationType.INSERT)
     public JsonResult<Object> noticeCreate(@RequestBody @Valid Notice notice) {
         int isStatus = noticeService.saveNotice(notice);
         if (isStatus == 0) {
@@ -64,6 +67,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "修改公告")
     @PostMapping("/update")
+    @OperationLogSys(desc = "修改公告", operationType = OperationType.UPDATE)
     public JsonResult<Object> noticeUpdate(@RequestBody @Valid Notice notice) {
         int isStatus = noticeService.updateNotice(notice);
         if (isStatus == 0) {
@@ -78,6 +82,7 @@ public class NoticeController {
      */
     @ApiOperation(value = "删除公告")
     @PostMapping("/delete/{id}")
+    @OperationLogSys(desc = "删除公告", operationType = OperationType.DELETE)
     public JsonResult<Object> noticeDelete(@PathVariable(value = "id") int id) {
         noticeService.deleteNotice(id);
         return JsonResult.success();

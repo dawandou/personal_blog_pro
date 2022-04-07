@@ -1,6 +1,5 @@
 package com.blog.personalblog.mapper;
 
-import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.entity.Notice;
 import org.springframework.stereotype.Repository;
 

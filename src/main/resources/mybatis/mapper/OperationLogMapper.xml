@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.OperationLogMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.OperationLog">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="operation_ip" jdbcType="VARCHAR" property="operationIp"/>
+        <result column="opera_location" jdbcType="VARCHAR" property="operaLocation"/>
+        <result column="methods" jdbcType="VARCHAR" property="methods"/>
+        <result column="args" jdbcType="VARCHAR" property="args"/>
+        <result column="operation_name" jdbcType="VARCHAR" property="operationName"/>
+        <result column="operation_type" jdbcType="VARCHAR" property="operationType"/>
+        <result column="return_value" jdbcType="VARCHAR" property="returnValue"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <insert id="createOperationLog" parameterType="com.blog.personalblog.entity.OperationLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO person_operation_log (operation_ip, opera_location, methods, args, operation_name, operation_type, return_value)
+        VALUES(#{operationIp}, #{operaLocation}, #{methods}, #{args}, #{operationName}, #{operationType}, #{returnValue})
+    </insert>
+
+    <select id="getOperationLogPage" resultMap="BaseResultMap">
+        select * from person_operation_log
+    </select>
+
+
+</mapper>

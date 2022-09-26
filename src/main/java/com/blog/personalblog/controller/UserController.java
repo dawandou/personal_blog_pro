@@ -114,11 +114,16 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "删除用户")
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     @OperationLogSys(desc = "删除用户", operationType = OperationType.DELETE)
-    public JsonResult<Object> userDelete(@PathVariable(value = "id") int id) {
+    public JsonResult<Object> userDelete(@RequestParam(value = "id") int id) {
         userService.deleteUser(id);
         return JsonResult.success();
+    }
+
+    @RequestMapping("/")
+    public String index(){
+        return "hello index";
     }
 
     /**
@@ -139,6 +144,9 @@ public class UserController {
             ret.put("token", subject.getSession().getId());
             logger.info("{} login success", loginModel.getUsername());
             getLoginInfoLog(loginModel, 0);
+            //修改上个登录的时间
+            User user = userService.getUserByUserName(loginModel.getUsername());
+            userService.updateLoginTime(user.getId());
             return JsonResult.success(ret);
         } catch (IncorrectCredentialsException e) {
             logger.info("login fail {}", e.getMessage());
@@ -158,15 +166,27 @@ public class UserController {
 
     }
 
+    @RequestMapping("/logout")
+    public JsonResult logout(){
+        return JsonResult.success();
+    }
+
+    @RequestMapping("/unauth")
+    public JsonResult unauth(){
+        return JsonResult.error(ErrorCode.NOT_LOGIN);
+    }
+
     /**
      * 登录info信息
      * @return
      */
     @GetMapping("/info")
     public JsonResult<Object> info(){
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        User user = userService.getUserByUserName(username);
         Map<String, Object> ret = new HashMap<>(3);
         ret.put("roles", "[admin]");
-        ret.put("name", "admin");
+        ret.put("name", user.getUserName());
         ret.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         return JsonResult.success(ret);
     }

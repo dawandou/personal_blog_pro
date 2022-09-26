@@ -54,4 +54,10 @@ public interface UserMapper {
      * @return
      */
     User findByUsername(String userName);
+
+    /**
+     * 更新上次登录时间
+     * @param user
+     */
+    void updateById(User user);
 }

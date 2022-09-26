@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.personalblog.mapper.LoginOperationLogMapper">
+    <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.LoginOperationLog">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="ip_address" jdbcType="VARCHAR" property="ipAddress"/>
+        <result column="login_location" jdbcType="VARCHAR" property="loginLocation"/>
+        <result column="browser_type" jdbcType="VARCHAR" property="browserType"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
+        <result column="login_status" jdbcType="INTEGER" property="loginStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <insert id="createLoginOperationLog" parameterType="com.blog.personalblog.entity.LoginOperationLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO person_login_log (login_name, ip_address, login_location, browser_type, os, login_status)
+        VALUES(#{loginName}, #{ipAddress}, #{loginLocation}, #{browserType}, #{os}, #{loginStatus})
+    </insert>
+
+    <select id="getLoginOperationLogPage" resultMap="BaseResultMap">
+        select * from person_login_log
+    </select>
+
+
+</mapper>

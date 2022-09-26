@@ -2,6 +2,7 @@ package com.blog.personalblog.controller;
 
 import com.blog.personalblog.annotation.OperationLogSys;
 import com.blog.personalblog.annotation.OperationType;
+import com.blog.personalblog.common.PageRequestApi;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.service.CategoryService;
 import com.blog.personalblog.util.JsonResult;
@@ -38,10 +39,10 @@ public class CategoryController {
      */
     @ApiOperation(value = "分类列表")
     @PostMapping("list")
-    public JsonResult<Object> listPage(@RequestBody @Valid PageRequest pageRequest) {
-        List<Category> categoryList = categoryService.getCategoryPage(pageRequest);
+    public JsonResult<Object> listPage(@RequestBody @Valid PageRequestApi<PageRequest> pageRequest) {
+        List<Category> categoryList = categoryService.getCategoryPage(pageRequest.getBody());
         PageInfo pageInfo = new PageInfo(categoryList);
-        PageResult pageResult = PageUtil.getPageResult(pageRequest, pageInfo);
+        PageResult pageResult = PageUtil.getPageResult(pageRequest.getBody(), pageInfo);
         return JsonResult.success(pageResult);
     }
 
@@ -80,9 +81,9 @@ public class CategoryController {
      * @return
      */
     @ApiOperation(value = "删除分类")
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     @OperationLogSys(desc = "删除分类", operationType = OperationType.DELETE)
-    public JsonResult<Object> categoryDelete(@PathVariable(value = "id") int id) {
+    public JsonResult<Object> categoryDelete(@RequestParam(value = "id") int id) {
         categoryService.deleteCategory(id);
         return JsonResult.success();
     }

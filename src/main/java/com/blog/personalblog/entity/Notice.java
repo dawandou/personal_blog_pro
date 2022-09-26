@@ -1,5 +1,6 @@
 package com.blog.personalblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Notice {
     /**
      * 主键
      */
-    private int noticeId;
+    private Integer noticeId;
 
     /**
      * 公告标题
@@ -24,12 +25,12 @@ public class Notice {
     /**
      * 公告类型，默认0, 0-公告, 1-通知, 2-提醒
      */
-    private int noticeType;
+    private Integer noticeType;
 
     /**
-     * 状态，默认0, 0-正常, 1-关闭
+     * 状态，默认0, true-正常, false-关闭
      */
-    private int status;
+    private Boolean noticeStatus;
 
     /**
      * 公告内容
@@ -44,11 +45,13 @@ public class Notice {
     /**
      * 创建时间
      */
+    @JsonFormat(timezone = "GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
+    @JsonFormat(timezone = "GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
 }

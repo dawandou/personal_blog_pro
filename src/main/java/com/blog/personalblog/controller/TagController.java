@@ -2,6 +2,7 @@ package com.blog.personalblog.controller;
 
 import com.blog.personalblog.annotation.OperationLogSys;
 import com.blog.personalblog.annotation.OperationType;
+import com.blog.personalblog.common.PageRequestApi;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
 import com.blog.personalblog.entity.Tag;
@@ -36,10 +37,10 @@ public class TagController {
      */
     @ApiOperation(value = "标签列表")
     @PostMapping("list")
-    public JsonResult<Object> listPage(@RequestBody @Valid PageRequest pageRequest) {
-        List<Tag> tagList = tagService.getTagPage(pageRequest);
+    public JsonResult<Object> listPage(@RequestBody @Valid PageRequestApi<PageRequest> pageRequest) {
+        List<Tag> tagList = tagService.getTagPage(pageRequest.getBody());
         PageInfo pageInfo = new PageInfo(tagList);
-        PageResult pageResult = PageUtil.getPageResult(pageRequest, pageInfo);
+        PageResult pageResult = PageUtil.getPageResult(pageRequest.getBody(), pageInfo);
         return JsonResult.success(pageResult);
     }
 

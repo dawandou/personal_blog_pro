@@ -1,5 +1,6 @@
 package com.blog.personalblog.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class User {
      * 主键id
      */
     private Integer id;
+
 
     /**
      * 用户名
@@ -36,7 +38,8 @@ public class User {
     /**
      * 上次登录时间
      */
-    private Date lastLoginTime;
+    @JsonFormat(timezone = "GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime lastLoginTime;
 
     /**
      * 手机号
@@ -51,6 +54,7 @@ public class User {
     /**
      * 创建时间
      */
+    @JsonFormat(timezone = "GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**

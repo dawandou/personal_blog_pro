@@ -6,6 +6,7 @@ import com.blog.personalblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -58,4 +59,13 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.findByUsername(userName);
         return user;
     }
+
+    @Override
+    public void updateLoginTime(Integer userId) {
+        User user = new User();
+        user.setId(userId);
+        user.setLastLoginTime(LocalDateTime.now());
+        userMapper.updateById(user);
+    }
+
 }

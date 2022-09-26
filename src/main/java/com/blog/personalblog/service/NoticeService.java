@@ -36,4 +36,11 @@ public interface NoticeService {
      */
     void deleteNotice(Integer noticeId);
 
+    /**
+     * 根据公告id获取公告
+     * @param noticeId
+     * @return
+     */
+    Notice getNoticeById(Integer noticeId);
+
 }

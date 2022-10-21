@@ -1,7 +1,10 @@
 package com.blog.personalblog.service;
 
 import com.blog.personalblog.bo.ArticleBO;
+import com.blog.personalblog.bo.ArticleInsertBO;
 import com.blog.personalblog.entity.Article;
+import com.blog.personalblog.vo.ArticleVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,10 +27,10 @@ public interface ArticleService {
 
     /**
      * 新建文章
-     * @param article
+     * @param bo
      * @return
      */
-    void saveArticle(Article article);
+    void insertOrUpdateArticle(ArticleInsertBO bo);
 
     /**
      * 修改文章
@@ -47,6 +50,14 @@ public interface ArticleService {
      * @param articleId
      * @return
      */
-    Article findById(Integer articleId);
+    ArticleVO findById(Integer articleId);
+
+    /**
+     * 上传文件
+     *
+     * @param file
+     * @return
+     */
+    String uploadFile(MultipartFile file);
 
 }

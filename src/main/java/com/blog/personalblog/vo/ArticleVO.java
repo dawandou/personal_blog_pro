@@ -1,5 +1,6 @@
-package com.blog.personalblog.entity;
+package com.blog.personalblog.vo;
 
+import com.blog.personalblog.entity.Tag;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -7,10 +8,11 @@ import java.util.List;
 
 /**
  * @author: SuperMan
- * @create: 2021-12-01
- */
+ * @create: 2022-10-10
+ **/
+
 @Data
-public class Article {
+public class ArticleVO {
     /**
      * 文章id
      */
@@ -82,18 +84,14 @@ public class Article {
     private LocalDateTime updateTime;
 
     /**
-     * 文章标签(页面展示)
+     * 文章标签
      */
     private List<Tag> tagList;
 
-    /**
-     * 文章标签添加或更新时使用
-     */
-    private List<Integer> tagIdList;
+    private List<String> tagNameList;
 
     /**
-     * 分类名称(页面展示)
+     * 分类名称
      */
     private String categoryName;
-
 }

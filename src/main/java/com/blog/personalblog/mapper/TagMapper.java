@@ -1,5 +1,6 @@
 package com.blog.personalblog.mapper;
 
+import com.blog.personalblog.bo.TagBO;
 import com.blog.personalblog.entity.Tag;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -65,4 +66,11 @@ public interface TagMapper {
      * @return
      */
     Tag getTagById(@Param("tagId") Integer tagId);
+
+    /**
+     * 查询文章标签
+     * @param bo
+     * @return
+     */
+    List<Tag> findTagsByTagName(TagBO bo);
 }

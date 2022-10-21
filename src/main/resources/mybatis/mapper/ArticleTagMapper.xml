@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blog.personalblog.mapper.ArticleTagMapper">
     <resultMap id="BaseResultMap" type="com.blog.personalblog.entity.ArticleTag">
-        <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="article_id" jdbcType="INTEGER" property="articleId"/>
         <result column="tag_id" jdbcType="INTEGER" property="tagId"/>
     </resultMap>

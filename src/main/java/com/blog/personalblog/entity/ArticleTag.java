@@ -12,11 +12,6 @@ import lombok.Data;
 public class ArticleTag {
 
     /**
-     * id
-     */
-    private Integer id;
-
-    /**
      * 文章id
      */
     private Integer articleId;

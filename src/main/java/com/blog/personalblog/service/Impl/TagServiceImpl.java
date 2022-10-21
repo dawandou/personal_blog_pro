@@ -1,5 +1,6 @@
 package com.blog.personalblog.service.Impl;
 
+import com.blog.personalblog.bo.TagBO;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.entity.Tag;
 import com.blog.personalblog.mapper.TagMapper;
@@ -60,7 +61,7 @@ public class TagServiceImpl implements TagService {
             }
         }
         //我们限制下添加的数量，一次最多添加10个标签
-        if (tagList == null || tagList.size() == 0 || tagList.size() > 10){
+        if (tagList == null || tagList.size() == 0 || tagList.size() > 3){
             throw new Exception ("标签已存在或超过添加标签的限制！");
         }
         boolean isStatus = tagMapper.batchAddTag(tagList);
@@ -93,6 +94,12 @@ public class TagServiceImpl implements TagService {
     public Tag findTagById(Integer tagId) {
         Tag tag = tagMapper.getTagById(tagId);
         return tag;
+    }
+
+    @Override
+    public List<Tag> getTagsByTagName(TagBO bo) {
+        List<Tag> tagsByTagName = tagMapper.findTagsByTagName(bo);
+        return tagsByTagName;
     }
 
 }

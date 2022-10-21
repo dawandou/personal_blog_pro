@@ -6,14 +6,14 @@ CREATE TABLE `person_article` (
     `author`         VARCHAR(128)    NOT NULL                            COMMENT '作者',
     `title`          VARCHAR(255)    NOT NULL                            COMMENT '文章标题',
 	`user_id`        INT(11)         NOT NULL                            COMMENT '用户id',
-	`category_id`    INT(11)         NOT NULL                            COMMENT '分类id',
-	`content`        LONGTEXT            NULL                            COMMENT '文章内容',
+	`category_id`    INT(11)             NULL                            COMMENT '分类id',
+	`content`        LONGTEXT        NOT NULL                            COMMENT '文章内容',
     `views`          BIGINT          NOT NULL DEFAULT 0                  COMMENT '文章浏览量',
 	`total_words`    BIGINT          NOT NULL DEFAULT 0                  COMMENT '文章总字数',
     `commentable_id` INT    		     NULL                            COMMENT '评论id',
-	`art_status`     TINYINT    		 NOT NULL DEFAULT 0              COMMENT '发布，默认0, 0-发布, 1-草稿',
-	`description`    VARCHAR(255)    NOT NULL                            COMMENT '描述',
-	`image_url`      VARCHAR(255)    NOT NULL                            COMMENT '文章logo',
+	`art_status`     TINYINT    	 NOT NULL DEFAULT 1                  COMMENT '发布，默认1, 1-发布, 2-仅我可见  3-草稿',
+	`description`    VARCHAR(255)        NULL                            COMMENT '描述',
+	`image_url`      VARCHAR(255)        NULL                            COMMENT '文章logo',
     `create_time`    DATETIME            NULL DEFAULT CURRENT_TIMESTAMP  COMMENT '创建时间',
     `update_time`    DATETIME            NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'
 ) ENGINE = InnoDB
@@ -24,9 +24,8 @@ CREATE TABLE `person_article` (
 
 DROP TABLE IF EXISTS `person_article_tag`;
 CREATE TABLE `person_article_tag` (
-    `id`            INT             NOT NULL PRIMARY KEY AUTO_INCREMENT     COMMENT '主键',
-    `tag_id`		INT(11)         NOT NULL                                COMMENT '标签id',
-    `article_id`	INT(11)         NOT NULL                                COMMENT '文章id'
+    `tag_id`		INT(11)         NOT NULL            COMMENT '标签id',
+    `article_id`	INT(11)         NOT NULL            COMMENT '文章id'
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_bin

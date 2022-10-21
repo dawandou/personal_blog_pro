@@ -2,6 +2,7 @@ package com.blog.personalblog.controller;
 
 import com.blog.personalblog.annotation.OperationLogSys;
 import com.blog.personalblog.annotation.OperationType;
+import com.blog.personalblog.bo.CategoryBO;
 import com.blog.personalblog.common.PageRequestApi;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.service.CategoryService;
@@ -86,6 +87,19 @@ public class CategoryController {
     public JsonResult<Object> categoryDelete(@RequestParam(value = "id") int id) {
         categoryService.deleteCategory(id);
         return JsonResult.success();
+    }
+
+    /**
+     * 搜索文章分类
+     * @param bo
+     * @return
+     */
+    @ApiOperation(value = "查询分类名称")
+    @PostMapping("/getCategory")
+    @OperationLogSys(desc = "查询分类名称", operationType = OperationType.SELECT)
+    public JsonResult<Object> getCategoryByName(@RequestBody @Valid CategoryBO bo) {
+        List<Category> categoriesByName = categoryService.getCategoriesByName(bo);
+        return JsonResult.success(categoriesByName);
     }
 
 }

@@ -3,17 +3,23 @@ package com.blog.personalblog.controller;
 import com.blog.personalblog.annotation.OperationLogSys;
 import com.blog.personalblog.annotation.OperationType;
 import com.blog.personalblog.bo.ArticleBO;
+import com.blog.personalblog.bo.ArticleInsertBO;
+import com.blog.personalblog.common.PageRequestApi;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
 import com.blog.personalblog.entity.Article;
+import com.blog.personalblog.entity.User;
 import com.blog.personalblog.service.ArticleService;
 import com.blog.personalblog.util.JsonResult;
 import com.blog.personalblog.util.PageUtil;
+import com.blog.personalblog.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,12 +43,12 @@ public class ArticleController {
      */
     @ApiOperation(value = "文章列表")
     @PostMapping("list")
-    public JsonResult<Object> listPage(@RequestBody @Valid ArticleBO articleBO) {
-        List<Article> articleList = articleService.getArticlePage(articleBO);
+    public JsonResult<Object> listPage(@RequestBody @Valid PageRequestApi<ArticleBO> articleBO) {
+        List<Article> articleList = articleService.getArticlePage(articleBO.getBody());
         PageInfo pageInfo = new PageInfo(articleList);
         PageRequest pageRequest = new PageRequest();
-        pageRequest.setPageNum(articleBO.getPageNum());
-        pageRequest.setPageSize(articleBO.getPageSize());
+        pageRequest.setPageNum(articleBO.getBody().getPageNum());
+        pageRequest.setPageSize(articleBO.getBody().getPageSize());
         PageResult pageResult = PageUtil.getPageResult(pageRequest, pageInfo);
         return JsonResult.success(pageResult);
     }
@@ -54,8 +60,8 @@ public class ArticleController {
     @ApiOperation(value = "添加文章")
     @PostMapping("/create")
     @OperationLogSys(desc = "添加文章", operationType = OperationType.INSERT)
-    public JsonResult<Object> articleCreate(@RequestBody @Valid Article article) {
-        articleService.saveArticle(article);
+    public JsonResult<Object> articleCreate(@RequestBody @Valid ArticleInsertBO bo) {
+        articleService.insertOrUpdateArticle(bo);
         return JsonResult.success();
     }
 
@@ -92,8 +98,20 @@ public class ArticleController {
     @GetMapping("/getArticle/{id}")
     @OperationLogSys(desc = "根据文章id查找", operationType = OperationType.SELECT)
     public JsonResult<Object> getArticleById(@PathVariable(value = "id") int id) {
-        Article article = articleService.findById(id);
+        ArticleVO article = articleService.findById(id);
         return JsonResult.success(article);
+    }
+
+    /**
+     * 上传网站logo封面
+     * @param file
+     * @return 返回logo地址
+     */
+    @ApiOperation(value = "上传网站logo封面")
+    @PostMapping("upload")
+    public JsonResult<Object> uploadImg(@RequestParam(value = "file") MultipartFile file) {
+        String s = articleService.uploadFile(file);
+        return JsonResult.success(s);
     }
 
 

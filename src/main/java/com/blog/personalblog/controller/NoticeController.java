@@ -7,7 +7,9 @@ import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.entity.Notice;
+import com.blog.personalblog.entity.User;
 import com.blog.personalblog.service.NoticeService;
+import com.blog.personalblog.service.UserService;
 import com.blog.personalblog.util.JsonResult;
 import com.blog.personalblog.util.PageUtil;
 import com.github.pagehelper.PageInfo;
@@ -17,6 +19,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class NoticeController {
 
     @Autowired
     NoticeService noticeService;
+    @Resource
+    private UserService userService;
 
     /**
      * 分页查询列表
@@ -57,7 +62,8 @@ public class NoticeController {
     @OperationLogSys(desc = "添加公告", operationType = OperationType.INSERT)
     public JsonResult<Object> noticeCreate(@RequestBody @Valid Notice notice) {
         String username = (String) SecurityUtils.getSubject().getPrincipal();
-        notice.setCreateBy(username);
+        User user = userService.getUserByUserName(username);
+        notice.setCreateBy(user.getUserName());
         int isStatus = noticeService.saveNotice(notice);
         if (isStatus == 0) {
             return JsonResult.error("添加公告失败");

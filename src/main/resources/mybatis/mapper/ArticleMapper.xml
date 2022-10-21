@@ -19,12 +19,6 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="categoryname" jdbcType="VARCHAR" property="categoryName"></result>
-        <collection property="tagList" ofType="com.blog.personalblog.entity.Tag">
-            <id column="sid" property="id"/>
-            <result column="tag_name" property="tagName"/>
-            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        </collection>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -41,15 +35,9 @@
     <select id="getArticlePage" resultMap="BaseResultMap" parameterType="com.blog.personalblog.bo.ArticleBO">
         SELECT
         a.*,
-        tag.article_id,
-        tag.tag_id,
-        s.id AS sid,
-        u.category_name categoryname,
-        s.tag_name
+        u.category_name categoryname
         FROM person_article a
-        left join person_category u on a.category_id = u.category_id
-        left join person_article_tag tag on a.id = tag.article_id
-        left join person_tag s on s.id = tag.tag_id
+        left JOIN person_category u on a.category_id = u.category_id
         <where>
             <if test="articleBO.title != null">
                 and a.title like '%${articleBO.title}%'
@@ -61,7 +49,6 @@
                 and a.art_status = #{articleBO.artStatus}
             </if>
         </where>
-
 
     </select>
 

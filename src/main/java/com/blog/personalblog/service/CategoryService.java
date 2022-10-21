@@ -1,5 +1,6 @@
 package com.blog.personalblog.service;
 
+import com.blog.personalblog.bo.CategoryBO;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.config.page.PageRequest;
 
@@ -45,5 +46,19 @@ public interface CategoryService {
      * @return
      */
     Category findById(Integer categoryId);
+
+    /**
+     * 搜索文章分类
+     * @param bo
+     * @return
+     */
+    List<Category> getCategoriesByName(CategoryBO bo);
+
+    /**
+     * 获取分类
+     * @param categoryName
+     * @return
+     */
+    Category getCategoryByName(String categoryName);
 
 }

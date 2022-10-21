@@ -2,6 +2,7 @@ package com.blog.personalblog.controller;
 
 import com.blog.personalblog.annotation.OperationLogSys;
 import com.blog.personalblog.annotation.OperationType;
+import com.blog.personalblog.bo.TagBO;
 import com.blog.personalblog.common.PageRequestApi;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.config.page.PageResult;
@@ -121,5 +122,18 @@ public class TagController {
     public JsonResult<Object> tagDelete(@PathVariable(value = "id") int id) {
         tagService.deleteTag(id);
         return JsonResult.success();
+    }
+
+    /**
+     * 按条件查询文章标签
+     * @param bo
+     * @return
+     */
+    @ApiOperation(value = "查询文章标签")
+    @PostMapping("/selectTag")
+    @OperationLogSys(desc = "查询文章标签", operationType = OperationType.SELECT)
+    public JsonResult<Object> getTagByTagName(@RequestBody @Valid TagBO bo) {
+        List<Tag> tagsByTagName = tagService.getTagsByTagName(bo);
+        return JsonResult.success(tagsByTagName);
     }
 }

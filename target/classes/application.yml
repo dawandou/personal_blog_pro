@@ -3,9 +3,9 @@ spring:
     name: blog
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/person_blog?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
-    username: root
-    password: 123456
+    url: jdbc:mysql://# 你本地的IP地址:3306/person_blog?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: #数据库用户名
+    password: #数据库连接密码
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   redis:
@@ -18,7 +18,11 @@ spring:
       repositories:
         enabled: false
 
-
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 server:
   port: 9090
@@ -35,3 +39,14 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+upload:
+  local:
+    path: /blog/uploadFile/
+    url: http://localhost:9090/blog
+
+send:
+  mail:
+    host: smtp.163.com
+    port: 25
+    from: xyh2390472338@163.com
+    pass: SRIHHGBIOEGOCAIC

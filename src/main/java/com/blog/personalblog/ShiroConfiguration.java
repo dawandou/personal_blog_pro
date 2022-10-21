@@ -61,12 +61,11 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/","anon");
         filterChainDefinitionMap.put("/csrf","anon");
-
+        filterChainDefinitionMap.put("/blog/uploadFile/articles/**","anon");
+        filterChainDefinitionMap.put("/article/upload", "anon");
 
         //filterChainDefinitionMap.put("/user/info", "anon");
         filterChainDefinitionMap.put("/**", "authc");
-
-
 
         //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
         filterChainDefinitionMap.put("/user/unauth", "anon");

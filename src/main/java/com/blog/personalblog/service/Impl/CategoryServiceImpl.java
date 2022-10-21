@@ -1,5 +1,6 @@
 package com.blog.personalblog.service.Impl;
 
+import com.blog.personalblog.bo.CategoryBO;
 import com.blog.personalblog.entity.Category;
 import com.blog.personalblog.mapper.CategoryMapper;
 import com.blog.personalblog.service.CategoryService;
@@ -53,6 +54,18 @@ public class CategoryServiceImpl implements CategoryService {
         if (category == null) {
             return null;
         }
+        return category;
+    }
+
+    @Override
+    public List<Category> getCategoriesByName(CategoryBO bo) {
+        List<Category> categoriesByName = categoryMapper.findCategoriesByName(bo);
+        return categoriesByName;
+    }
+
+    @Override
+    public Category getCategoryByName(String categoryName) {
+        Category category = categoryMapper.getCategoryByName(categoryName);
         return category;
     }
 }

@@ -1,5 +1,6 @@
 package com.blog.personalblog.service;
 
+import com.blog.personalblog.bo.TagBO;
 import com.blog.personalblog.config.page.PageRequest;
 import com.blog.personalblog.entity.Tag;
 import io.swagger.models.auth.In;
@@ -65,5 +66,13 @@ public interface TagService {
      * @return
      */
     Tag findTagById(Integer tagId);
+
+    /**
+     * 搜索文章标签
+     *
+     * @param bo
+     * @return
+     */
+    List<Tag> getTagsByTagName(TagBO bo);
 
 }

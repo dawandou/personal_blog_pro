@@ -19,6 +19,14 @@
 
 **还可以通过CSDN上去查看本教程：[Spring Boot + vue-element 开发个人博客项目实战教程](https://blog.csdn.net/m0_37779600/article/details/120937543)**
 
+
+
+### 运行地址
+
+[http://localhost:9528](http://localhost:9528)
+
+**初始密码为：admin/123456**
+
 ## 3、软件架构
 
 ### 3.1、后端技术
@@ -68,11 +76,13 @@
 
 数据库在项目的初始文件中，直接可以在数据库中运行文件中的代码即可创建完表。
 
-文件名为：`init.sql`
+**文件名为**：`init.sql`
+
+**初始化用户**：`dml.sql`
 
 ### 4.2、数据库配置
 
-当你拿到项目后，创建完数据库后，要去项目的application.yml中去配置你的数据库配置。
+当你拿到项目后，创建完数据库后，要去项目的`application.yml`中去配置你的数据库配置。
 
 ```yml
   datasource:

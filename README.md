@@ -9,7 +9,7 @@
 
 ## 2、详细教程
 
-**前端代码地址**：[https://gitee.com/xyhwh/personal_vue](https://gitee.com/xyhwh/personal_vue)
+**前端代码地址**：[https://github.com/dawandou/personal_blog_vue](https://github.com/dawandou/personal_blog_vue)
 
 **如何获得本教程：**
 

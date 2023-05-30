@@ -179,12 +179,13 @@ public class ArticleServiceImpl implements ArticleService {
         if (StrUtil.isEmpty(bo.getCategoryName())) {
             return null;
         }
+        Category cat = new Category();
         Category category = categoryService.getCategoryByName(bo.getCategoryName());
         if (category == null && !ArticleArtStatusEnum.DRAFT.getStatus().equals(bo.getArtStatus())) {
-            category.setCategoryName(bo.getCategoryName());
-            categoryService.saveCategory(category);
+            cat.setCategoryName(bo.getCategoryName());
+            categoryService.saveCategory(cat);
         }
-        return category;
+        return cat;
     }
 
     private void saveTags(ArticleInsertBO bo, Integer articleId) {
@@ -286,6 +287,12 @@ public class ArticleServiceImpl implements ArticleService {
             log.error("文件上传失败");
         }
         return null;
+    }
+
+    @Override
+    public List<Article> getAll() {
+        List<Article> all = articleMapper.findAll();
+        return all;
     }
 
     private void upload(String path, String fileName, InputStream inputStream) throws IOException {

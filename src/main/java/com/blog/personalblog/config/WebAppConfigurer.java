@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 这个是访问图片拦截的
  *
- * @author: xyh
+ * @author: SuperMan
  * @create: 2022-08-20
  **/
 @Configuration

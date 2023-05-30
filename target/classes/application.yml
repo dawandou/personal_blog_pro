@@ -3,9 +3,9 @@ spring:
     name: blog
 
   datasource:
-    url: jdbc:mysql://# 你本地的IP地址:3306/person_blog?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
-    username: #数据库用户名
-    password: #数据库连接密码
+    url: jdbc:mysql://localhost:3306/person_blog?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   redis:
@@ -42,11 +42,11 @@ pagehelper:
 upload:
   local:
     path: /blog/uploadFile/
-    url: http://localhost:9090/blog
+    url:  # 你本地的访问地址， 例如：http://localhost:8080/blog
 
 send:
   mail:
-    host: smtp.163.com
-    port: 25
-    from: xyh2390472338@163.com
-    pass: SRIHHGBIOEGOCAIC
+    host: # 邮件服务器的SMTP地址
+    port: # 邮件服务器的SMTP端口
+    from: # 发件人
+    pass: # 密码

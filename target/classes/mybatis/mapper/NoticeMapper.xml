@@ -43,5 +43,8 @@
         select * from person_notice where notice_id = #{noticeId}
     </select>
 
+    <select id="getNoticeTopFive" resultMap="BaseResultMap">
+        SELECT * FROM person_notice ORDER BY create_time DESC LIMIT 5;
+    </select>
 
 </mapper>

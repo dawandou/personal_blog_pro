@@ -50,4 +50,10 @@ public class NoticeServiceImpl implements NoticeService {
         return notice;
     }
 
+    @Override
+    public List<Notice> getNoticeTopFive() {
+        List<Notice> noticeList = noticeMapper.getNoticeTopFive();
+        return noticeList;
+    }
+
 }

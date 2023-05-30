@@ -45,4 +45,6 @@ public interface NoticeMapper {
      */
     Notice getNoticeById(Integer id);
 
+    List<Notice> getNoticeTopFive();
+
 }

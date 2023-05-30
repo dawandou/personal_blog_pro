@@ -60,4 +60,6 @@ public interface ArticleService {
      */
     String uploadFile(MultipartFile file);
 
+    List<Article> getAll();
+
 }
